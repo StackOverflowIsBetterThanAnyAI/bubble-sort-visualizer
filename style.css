@@ -1,6 +1,11 @@
+html {
+    min-height: 100dvh;
+}
+
 body {
     font-family: sans-serif;
-    color: #0e0e0e;
+    color: #fafafa;
+    background: linear-gradient(#172554, #1e3a8a);
 }
 
 h1 {
@@ -16,10 +21,10 @@ h1 {
 }
 
 .array-element {
-    outline: #424242 solid 2px;
+    outline: #57534e solid 2px;
     width: 48px;
     border-radius: 4px;
-    background-color: #fefefe;
+    background-color: #fafafa;
     font-size: 32px;
     display: flex;
     justify-content: center;

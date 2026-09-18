@@ -6,7 +6,7 @@ export const compareValues = (array, cur, next, prev, max) => {
         const prevElement = document.getElementById(
             `array-element-${arr[prev]}`
         )
-        prevElement.style.backgroundColor = '#FEFEFE'
+        prevElement.style.backgroundColor = '#fafafa'
     }
     const firstElement = document.getElementById(`array-element-${arr[cur]}`)
     firstElement.style.backgroundColor = '#21DD2B'
@@ -44,7 +44,7 @@ export const compareValues = (array, cur, next, prev, max) => {
                     : firstElement
 
             setTimeout(() => {
-                smallerElement.style.backgroundColor = '#FEFEFE'
+                smallerElement.style.backgroundColor = '#fafafa'
                 resetElementStyle(largerElement)
             }, 500)
             return setTimeout(() => compareValues(arr, 0, 1, -1, max - 1), 1000)
