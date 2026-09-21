@@ -1,7 +1,7 @@
-import { resetElementStyle } from './utils/resetElementStyle.js'
-import { swapValues } from './utils/swapValues.js'
+import { resetElementStyle } from './resetElementStyle.js'
+import { swapValues } from './swapValues.js'
 
-export const compareValues = (array, cur, next, prev, max) => {
+export const compareValues = (array, cur, next, prev, max, activeTimeouts) => {
     const arr = [...array]
 
     if (prev >= 0) {
@@ -19,13 +19,22 @@ export const compareValues = (array, cur, next, prev, max) => {
     secondElement.style.backgroundColor = '#fde047'
     secondElement.style.outlineColor = '#fafafa'
 
-    swapValues(arr, cur, next)
+    swapValues(arr, cur, next, activeTimeouts)
 
     if (next < max) {
-        return setTimeout(
-            () => compareValues(arr, cur + 1, next + 1, prev + 1, max),
+        const timeoutId = setTimeout(
+            () =>
+                compareValues(
+                    arr,
+                    cur + 1,
+                    next + 1,
+                    prev + 1,
+                    max,
+                    activeTimeouts
+                ),
             500
         )
+        activeTimeouts.push(timeoutId)
     } else {
         if (max > 1) {
             const firstNumber = parseInt(firstElement.textContent)
@@ -38,11 +47,17 @@ export const compareValues = (array, cur, next, prev, max) => {
                     ? secondElement
                     : firstElement
 
-            setTimeout(() => {
+            const timeoutId1 = setTimeout(() => {
                 smallerElement.style.backgroundColor = '#fafafa'
                 resetElementStyle(largerElement)
             }, 500)
-            return setTimeout(() => compareValues(arr, 0, 1, -1, max - 1), 1000)
+            activeTimeouts.push(timeoutId1)
+
+            const timeoutId2 = setTimeout(
+                () => compareValues(arr, 0, 1, -1, max - 1, activeTimeouts),
+                1000
+            )
+            activeTimeouts.push(timeoutId2)
         } else {
             resetElementStyle(firstElement)
             resetElementStyle(secondElement)
