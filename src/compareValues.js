@@ -3,12 +3,14 @@ import { swapValues } from './utils/swapValues.js'
 
 export const compareValues = (array, cur, next, prev, max) => {
     const arr = [...array]
+
     if (prev >= 0) {
         const prevElement = document.getElementById(
             `array-element-${arr[prev]}`
         )
         prevElement.style.backgroundColor = '#fafafa'
     }
+
     const firstElement = document.getElementById(`array-element-${arr[cur]}`)
     firstElement.style.backgroundColor = '#21DD2B'
 
