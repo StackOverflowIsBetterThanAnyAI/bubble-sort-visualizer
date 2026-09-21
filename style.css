@@ -21,7 +21,8 @@ h1 {
 }
 
 .array-element {
-    outline: #57534e solid 2px;
+    outline: #09090b solid 2px;
+    color: #0c0a09;
     width: 48px;
     border-radius: 4px;
     background-color: #fafafa;
