@@ -1,4 +1,5 @@
 import { resetElementStyle } from './utils/resetElementStyle.js'
+import { swapValues } from './utils/swapValues.js'
 
 export const compareValues = (array, cur, next, prev, max) => {
     const arr = [...array]
@@ -14,17 +15,7 @@ export const compareValues = (array, cur, next, prev, max) => {
     const secondElement = document.getElementById(`array-element-${arr[next]}`)
     secondElement.style.backgroundColor = '#DD9B21'
 
-    if (arr[cur] > arr[next]) {
-        ;[arr[cur], arr[next]] = [arr[next], arr[cur]]
-
-        const gridContainer = document.getElementById('grid-container')
-        setTimeout(() => {
-            arr.forEach((val) => {
-                const el = document.getElementById(`array-element-${val}`)
-                gridContainer.appendChild(el)
-            })
-        }, 500)
-    }
+    swapValues(arr, cur, next)
 
     if (next < max) {
         return setTimeout(
