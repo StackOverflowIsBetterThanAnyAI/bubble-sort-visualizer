@@ -6,6 +6,35 @@ body {
     font-family: sans-serif;
     color: #fafafa;
     background: linear-gradient(#172554, #1e3a8a);
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+button {
+    font-size: 24px;
+    width: fit-content;
+    padding: 4px 24px;
+    border-radius: 8px;
+    margin: auto;
+    cursor: pointer;
+    background-color: #fafafa;
+    color: #0c0a09;
+    outline: #09090b solid 2px;
+    border: none;
+}
+
+button:hover {
+    background-color: #e4e4e7;
+}
+
+button:active {
+    background-color: #d4d4d8;
+}
+
+button:focus-visible {
+    outline: #09090b solid 4px;
+    filter: drop-shadow(0px 2px 8px #09090b);
 }
 
 h1 {

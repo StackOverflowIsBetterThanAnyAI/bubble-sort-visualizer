@@ -1,5 +1,3 @@
-import { compareValues } from './compareValues.js'
-
 export const generateGrid = (array) => {
     const gridContainer = document.createElement('div')
     gridContainer.id = 'grid-container'
@@ -14,8 +12,6 @@ export const generateGrid = (array) => {
         gridContainer.append(element)
     }
 
-    const root = document.getElementById('root')
-    root.append(gridContainer)
-
-    compareValues(array, 0, 1, -1, array.length - 1)
+    const main = document.getElementById('main')
+    main.append(gridContainer)
 }
