@@ -12,10 +12,12 @@ export const compareValues = (array, cur, next, prev, max) => {
     }
 
     const firstElement = document.getElementById(`array-element-${arr[cur]}`)
-    firstElement.style.backgroundColor = '#21DD2B'
+    firstElement.style.backgroundColor = '#a3e635'
+    firstElement.style.outlineColor = '#fafafa'
 
     const secondElement = document.getElementById(`array-element-${arr[next]}`)
-    secondElement.style.backgroundColor = '#DD9B21'
+    secondElement.style.backgroundColor = '#fde047'
+    secondElement.style.outlineColor = '#fafafa'
 
     swapValues(arr, cur, next)
 
