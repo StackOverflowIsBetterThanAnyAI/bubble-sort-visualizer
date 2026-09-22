@@ -12,7 +12,7 @@ body {
 }
 
 button {
-    font-size: 24px;
+    font-size: 20px;
     width: fit-content;
     padding: 4px 24px;
     border-radius: 8px;
@@ -42,11 +42,48 @@ h1 {
     font-size: 64px;
 }
 
+#aside {
+    background-color: #27272a;
+    min-height: 64px;
+    min-width: 512px;
+    font-size: 14px;
+    padding: 8px;
+    outline: #fafafa solid 2px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: consolas;
+}
+
+#flexcol {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    outline: #fafafa solid 2px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #3f3f46;
+}
+
+#flexcontainer {
+    display: flex;
+    gap: 64px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 #grid-container {
     display: flex;
     gap: 16px;
     justify-content: center;
     align-items: flex-end;
+}
+
+#restart {
+    margin: 0px;
 }
 
 .array-element {
