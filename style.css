@@ -40,10 +40,12 @@ button:focus-visible {
 h1 {
     text-align: center;
     font-size: 64px;
+    margin: 24px;
 }
 
-#aside {
+#logs {
     background-color: #27272a;
+    max-height: 192px;
     min-height: 64px;
     min-width: 512px;
     font-size: 14px;
@@ -54,9 +56,10 @@ h1 {
     flex-direction: column;
     gap: 4px;
     font-family: consolas;
+    overflow: hidden auto;
 }
 
-#flexcol {
+#logcontainer {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -68,7 +71,7 @@ h1 {
     background-color: #3f3f46;
 }
 
-#flexcontainer {
+#maincontainer {
     display: flex;
     gap: 64px;
     flex-wrap: wrap;
