@@ -1,4 +1,4 @@
-import { scrollToBottom } from './scrolltoBottom.js'
+import { scrollToBottom } from './scrollToBottom.js'
 
 export const renderLogs = (message) => {
     const logs = document.getElementById('logs')
