@@ -26,7 +26,7 @@ export const compareValues = async (array, cur, next, prev, max) => {
 
     if (next < max) {
         await sleep(500)
-        compareValues(arr, cur + 1, next + 1, prev + 1, max)
+        return await compareValues(arr, cur + 1, next + 1, prev + 1, max)
     } else {
         if (max > 1) {
             const firstNumber = parseInt(firstElement.textContent)
@@ -39,13 +39,13 @@ export const compareValues = async (array, cur, next, prev, max) => {
                     ? secondElement
                     : firstElement
 
-            sleep(500)
+            await sleep(500)
             smallerElement.style.backgroundColor = '#fafafa'
             resetElementStyle(largerElement)
             renderLogs(`${largerElement.textContent} has been sorted correctly`)
 
             await sleep(1000)
-            compareValues(arr, 0, 1, -1, max - 1)
+            return await compareValues(arr, 0, 1, -1, max - 1)
         } else {
             const firstNumber = parseInt(firstElement.textContent)
             const secondNumber = parseInt(secondElement.textContent)

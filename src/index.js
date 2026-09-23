@@ -1,11 +1,14 @@
+import { activeTimeouts } from './utils/sleep.js'
 import { clearGrid } from './utils/clearGrid.js'
 import { clearLogs } from './utils/clearLogs.js'
+import { clearTimeouts } from './utils/clearTimeouts.js'
 import { compareValues } from './utils/compareValues.js'
 import { generateGrid } from './utils/generateGrid.js'
 import { generateLogs } from './utils/generateLogs.js'
 import { shuffleArray } from './utils/shuffleArray.js'
 
 const main = () => {
+    clearTimeouts(activeTimeouts)
     clearLogs()
     clearGrid()
 
