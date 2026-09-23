@@ -13,6 +13,9 @@ export const compareValues = async (array, cur, next, prev, max) => {
         prevElement.style.backgroundColor = '#fafafa'
     }
 
+    await sleep(500)
+    renderLogs(`Comparing ${arr[next]} with ${arr[cur]}`)
+
     const firstElement = document.getElementById(`array-element-${arr[cur]}`)
     firstElement.style.backgroundColor = '#a3e635'
     firstElement.style.outlineColor = '#fafafa'
@@ -21,8 +24,7 @@ export const compareValues = async (array, cur, next, prev, max) => {
     secondElement.style.backgroundColor = '#fde047'
     secondElement.style.outlineColor = '#fafafa'
 
-    await sleep(500)
-    swapValues(arr, cur, next)
+    await swapValues(arr, cur, next)
 
     if (next < max) {
         await sleep(500)
