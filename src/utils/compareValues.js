@@ -13,7 +13,7 @@ export const compareValues = async (array, cur, next, prev, max) => {
         prevElement.style.backgroundColor = '#fafafa'
     }
 
-    await sleep(500)
+    await sleep(400)
     renderLogs(`Comparing ${arr[next]} with ${arr[cur]}`)
 
     const firstElement = document.getElementById(`array-element-${arr[cur]}`)
@@ -27,7 +27,7 @@ export const compareValues = async (array, cur, next, prev, max) => {
     await swapValues(arr, cur, next)
 
     if (next < max) {
-        await sleep(500)
+        await sleep(400)
         return await compareValues(arr, cur + 1, next + 1, prev + 1, max)
     } else {
         if (max > 1) {
@@ -41,12 +41,12 @@ export const compareValues = async (array, cur, next, prev, max) => {
                     ? secondElement
                     : firstElement
 
-            await sleep(500)
+            await sleep(400)
             smallerElement.style.backgroundColor = '#fafafa'
             resetElementStyle(largerElement)
             renderLogs(`${largerElement.textContent} has been sorted correctly`)
 
-            await sleep(1000)
+            await sleep(800)
             return await compareValues(arr, 0, 1, -1, max - 1)
         } else {
             const firstNumber = parseInt(firstElement.textContent)

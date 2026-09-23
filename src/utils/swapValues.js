@@ -3,7 +3,7 @@ import { sleep } from './sleep.js'
 
 export const swapValues = async (arr, cur, next) => {
     if (arr[cur] > arr[next]) {
-        await sleep(500)
+        await sleep(600)
         renderLogs(`Swapping ${arr[next]} with ${arr[cur]}`)
         ;[arr[cur], arr[next]] = [arr[next], arr[cur]]
 
