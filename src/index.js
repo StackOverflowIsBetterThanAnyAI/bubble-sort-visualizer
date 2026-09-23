@@ -14,7 +14,7 @@ const main = () => {
     const windowWidth = window.innerWidth
     const array = shuffleArray(
         Array.from(
-            { length: windowWidth < 480 ? 10 : windowWidth < 768 ? 12 : 15 },
+            { length: windowWidth < 480 ? 8 : windowWidth < 768 ? 12 : 15 },
             (_, i) => i
         )
     )
