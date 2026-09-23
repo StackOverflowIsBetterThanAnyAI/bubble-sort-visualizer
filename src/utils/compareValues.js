@@ -1,14 +1,14 @@
 import { renderLogs } from './renderLogs.js'
 import { resetElementStyle } from './resetElementStyle.js'
+import { sleep } from './sleep.js'
 import { swapValues } from './swapValues.js'
 
-export const compareValues = (
+export const compareValues = async (
     array,
     cur,
     next,
     prev,
     max,
-    activeTimeouts,
     activeLogs
 ) => {
     const arr = [...array]
@@ -28,23 +28,12 @@ export const compareValues = (
     secondElement.style.backgroundColor = '#fde047'
     secondElement.style.outlineColor = '#fafafa'
 
-    swapValues(arr, cur, next, activeTimeouts, activeLogs)
+    await sleep(500)
+    swapValues(arr, cur, next, activeLogs)
 
     if (next < max) {
-        const timeoutId = setTimeout(
-            () =>
-                compareValues(
-                    arr,
-                    cur + 1,
-                    next + 1,
-                    prev + 1,
-                    max,
-                    activeTimeouts,
-                    activeLogs
-                ),
-            500
-        )
-        activeTimeouts.push(timeoutId)
+        await sleep(500)
+        compareValues(arr, cur + 1, next + 1, prev + 1, max, activeLogs)
     } else {
         if (max > 1) {
             const firstNumber = parseInt(firstElement.textContent)
@@ -57,30 +46,16 @@ export const compareValues = (
                     ? secondElement
                     : firstElement
 
-            const timeoutId1 = setTimeout(() => {
-                smallerElement.style.backgroundColor = '#fafafa'
-                resetElementStyle(largerElement)
-                renderLogs(
-                    activeLogs,
-                    `${largerElement.textContent} has been sorted correctly`
-                )
-            }, 500)
-            activeTimeouts.push(timeoutId1)
-
-            const timeoutId2 = setTimeout(
-                () =>
-                    compareValues(
-                        arr,
-                        0,
-                        1,
-                        -1,
-                        max - 1,
-                        activeTimeouts,
-                        activeLogs
-                    ),
-                1000
+            sleep(500)
+            smallerElement.style.backgroundColor = '#fafafa'
+            resetElementStyle(largerElement)
+            renderLogs(
+                activeLogs,
+                `${largerElement.textContent} has been sorted correctly`
             )
-            activeTimeouts.push(timeoutId2)
+
+            await sleep(1000)
+            compareValues(arr, 0, 1, -1, max - 1, activeLogs)
         } else {
             const firstNumber = parseInt(firstElement.textContent)
             const secondNumber = parseInt(secondElement.textContent)
