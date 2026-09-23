@@ -45,8 +45,7 @@ h1 {
 
 #logs {
     background-color: #27272a;
-    max-height: 192px;
-    min-height: 64px;
+    height: 100%;
     min-width: 512px;
     font-size: 14px;
     padding: 8px;
@@ -69,6 +68,8 @@ h1 {
     border-radius: 8px;
     padding: 16px;
     background-color: #3f3f46;
+    height: 192px;
+    align-self: flex-end;
 }
 
 #maincontainer {
