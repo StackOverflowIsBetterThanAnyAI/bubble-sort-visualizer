@@ -1,7 +1,6 @@
 import { scrollToBottom } from './scrolltoBottom.js'
 
-export const renderLogs = (activeLogs, message) => {
-    activeLogs.push(message)
+export const renderLogs = (message) => {
     const logs = document.getElementById('logs')
     const div = document.createElement('div')
     const text = document.createTextNode(message)
