@@ -11,8 +11,13 @@ const main = () => {
     clearTimeouts(activeTimeouts)
     clearLogs()
     clearGrid()
-
-    const array = shuffleArray(Array.from({ length: 15 }, (_, i) => i))
+    const windowWidth = window.innerWidth
+    const array = shuffleArray(
+        Array.from(
+            { length: windowWidth < 480 ? 10 : windowWidth < 768 ? 12 : 15 },
+            (_, i) => i
+        )
+    )
     generateGrid(array)
     generateLogs()
     compareValues(array, 0, 1, -1, array.length - 1)
