@@ -141,7 +141,7 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    color: #0c0a09;
+    color: #171717;
     margin: auto;
     outline: #09090b solid 2px;
     padding: 4px 24px;
@@ -157,8 +157,8 @@ button:active {
 }
 
 button:focus-visible {
-    filter: drop-shadow(0px 2px 8px #09090b);
-    outline: #09090b solid 4px;
+    filter: drop-shadow(0px 1px 4px #09090b);
+    outline: #09090b solid 3px;
 }
 
 h1 {
@@ -214,8 +214,24 @@ html {
     align-items: flex-end;
     background-color: #fafafa;
     border-radius: 4px;
-    color: #0c0a09;
+    color: #171717;
     display: flex;
     justify-content: center;
     outline: #09090b solid 2px;
+}
+
+.comparing {
+    color: #bbf7d0;
+}
+
+.optimization {
+    color: #38bdf8;
+}
+
+.sorted {
+    color: #4ade80;
+}
+
+.swapping {
+    color: #fef08a;
 }
