@@ -3,69 +3,106 @@ import { resetElementStyle } from './resetElementStyle.js'
 import { sleep } from './sleep.js'
 import { swapValues } from './swapValues.js'
 
-export const compareValues = async (array, cur, next, prev, max) => {
+const getElement = (value) => document.getElementById(`array-element-${value}`)
+
+const markSorted = (arr, index) => {
+    resetElementStyle(getElement(arr[index]))
+    renderLogs(`${arr[index]} has been sorted correctly`, 'sorted')
+}
+
+export const compareValues = async (
+    array,
+    cur,
+    next,
+    prev,
+    max,
+    lastSwap = -1
+) => {
     const arr = [...array]
 
     if (prev >= 0) {
-        const prevElement = document.getElementById(
-            `array-element-${arr[prev]}`
-        )
+        const prevElement = getElement(arr[prev])
         prevElement.style.backgroundColor = '#fafafa'
     }
 
     await sleep(400)
-    renderLogs(`Comparing ${arr[next]} with ${arr[cur]}`)
+    renderLogs(`Comparing ${arr[next]} with ${arr[cur]}`, 'comparing')
 
-    const firstElement = document.getElementById(`array-element-${arr[cur]}`)
+    const firstElement = getElement(arr[cur])
     firstElement.style.backgroundColor = '#a3e635'
     firstElement.style.outlineColor = '#fafafa'
 
-    const secondElement = document.getElementById(`array-element-${arr[next]}`)
+    const secondElement = getElement(arr[next])
     secondElement.style.backgroundColor = '#fde047'
     secondElement.style.outlineColor = '#fafafa'
 
-    await swapValues(arr, cur, next)
+    if (await swapValues(arr, cur, next)) {
+        lastSwap = cur
+    }
 
     if (next < max) {
         await sleep(400)
-        return await compareValues(arr, cur + 1, next + 1, prev + 1, max)
-    } else {
-        if (max > 1) {
-            const firstNumber = parseInt(firstElement.textContent)
-            const secondNumber = parseInt(secondElement.textContent)
-
-            const largerElement =
-                firstNumber > secondNumber ? firstElement : secondElement
-            const smallerElement =
-                firstNumber === parseInt(largerElement.textContent)
-                    ? secondElement
-                    : firstElement
-
-            await sleep(400)
-            smallerElement.style.backgroundColor = '#fafafa'
-            resetElementStyle(largerElement)
-            renderLogs(`${largerElement.textContent} has been sorted correctly`)
-
-            await sleep(800)
-            return await compareValues(arr, 0, 1, -1, max - 1)
-        } else {
-            const firstNumber = parseInt(firstElement.textContent)
-            const secondNumber = parseInt(secondElement.textContent)
-
-            const largerElement =
-                firstNumber > secondNumber ? firstElement : secondElement
-            const smallerElement =
-                firstNumber === parseInt(largerElement.textContent)
-                    ? secondElement
-                    : firstElement
-
-            resetElementStyle(largerElement)
-            resetElementStyle(smallerElement)
-            renderLogs(`${largerElement.textContent} has been sorted correctly`)
-            renderLogs(
-                `${smallerElement.textContent} has been sorted correctly`
-            )
-            renderLogs('The whole list has been sorted correctly')
-        }
+        return await compareValues(
+            arr,
+            cur + 1,
+            next + 1,
+            prev + 1,
+            max,
+            lastSwap
+        )
     }
+
+    // everything right of the last swap was not moved anymore and is final
+    const sortedFrom = Math.max(lastSwap + 1, 1)
+    const isDone = lastSwap <= 0
+
+    await sleep(400)
+    if (!isDone && sortedFrom === max) {
+        getElement(arr[max - 1]).style.backgroundColor = '#fafafa'
+    }
+    markSorted(arr, max)
+
+    if (!isDone && sortedFrom < max) {
+        const skipped = arr.slice(sortedFrom, max)
+        renderLogs(
+            `No swaps after ${arr[lastSwap]}: ${skipped.join(', ')} ${skipped.length === 1 ? 'is' : 'are'} already in place`,
+            'optimization'
+        )
+        for (let i = max - 1; i >= sortedFrom; i--) {
+            await sleep(400)
+            markSorted(arr, i)
+        }
+        renderLogs(
+            `Saved ${max - 1 - lastSwap} comparison(s) in the next pass`,
+            'optimization'
+        )
+    }
+
+    if (isDone) {
+        const skippedPasses = max - 1
+        if (skippedPasses > 0) {
+            renderLogs(
+                lastSwap === -1
+                    ? 'No swaps in this pass: the list is already sorted'
+                    : `No swaps after ${arr[0]}: the list is already sorted`,
+                'optimization'
+            )
+        }
+        for (let i = max - 1; i >= 0; i--) {
+            await sleep(skippedPasses > 0 ? 400 : 0)
+            markSorted(arr, i)
+        }
+        if (skippedPasses > 0) {
+            const savedComparisons = (skippedPasses * max) / 2
+            renderLogs(
+                `Saved ${skippedPasses} pass${skippedPasses > 1 ? 'es' : ''} with ${savedComparisons} comparison${savedComparisons > 1 ? 's' : ''}`,
+                'optimization'
+            )
+        }
+        renderLogs('The whole list has been sorted correctly', 'sorted')
+        return
+    }
+
+    await sleep(800)
+    return await compareValues(arr, 0, 1, -1, lastSwap)
 }
